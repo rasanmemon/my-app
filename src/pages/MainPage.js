@@ -12,14 +12,14 @@ import App from "../App";
 function MainPage() {
   return (
     <BrowserRouter >
-        <Layout />
       <Routes>
+        <Layout />
           <Route path="/Question" element={<Questions />} />
           {/* <Route path="*" element={<NoPage />} /> */}
     
-          <Route path="/Login" element={<LoginSys />} />
-          <Route path="/" element={<Home />}  />
+          <Route path="/Home" element={<Home />}  />
       </Routes>
+          <Route path="/" element={<LoginSys />} />
     </BrowserRouter>
   );
 }

@@ -22,7 +22,7 @@ function Layout () {
             <Link class="w3-bar-item w3-button " to="/Question">Question</Link>
           </li>
           <li >
-            <Link class="w3-bar-item w3-button " to="/Login">LogOut</Link>
+            <Link class="w3-bar-item w3-button " to="/">LogOut</Link>
           </li>
           
         </ul>

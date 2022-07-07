@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
+import React, { useState }  from "react";
+import ReactDOM  from "react-dom/client";
 import MainPage from "./MainPage";
 
 import "./login.css";
 import Home from "./Home";
-import { BrowserRouter as Router,Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter ,Route, Routes, useNavigate ,Navigate ,Redirect } from "react-router-dom";
 import { render } from "@testing-library/react";
   
 function LoginSys() {
@@ -46,8 +46,13 @@ function LoginSys() {
         setErrorMessages({ name: "pass", message: errors.pass });
         // Invalid password
       } else {
-        // setIsSubmitted(true);
-       ReactDOM.createRoot(document.getElementById('root')).render(<MainPage />)
+        setIsSubmitted(true);
+    //     <Routes>
+    //   <Route path="/Home">
+    //     <Home />
+    //   </Route>
+    //   <Navigate  from="/" to="/Home" />
+    // </Routes>
         
         
       }
@@ -90,7 +95,7 @@ function LoginSys() {
     <div >
       <div >
         <div className="title">Sign In</div>
-        { renderForm}
+        {isSubmitted ? <Navigate replace to="/Home" />: renderForm}
       </div>
     </div>
 
