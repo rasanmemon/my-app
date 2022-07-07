@@ -5,6 +5,7 @@ import LoginSys from './pages/Login';
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Questions from "./pages/Questions";
+import MainRouter from './routes/MainRouter';
 function App() {
   return (
     // <div className="App">
