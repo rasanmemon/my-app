@@ -14,7 +14,8 @@ const Questions = ()=> {
           .then((responce) => {
             if (responce.data.length > 0) {
              setdatabase([...responce.data])
-             console.log(database);
+             console.log(responce.data);
+             console.log(database)
             //  console.log(qdata)
             //   setloading(true);
           }
