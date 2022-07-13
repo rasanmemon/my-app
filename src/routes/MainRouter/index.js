@@ -2,7 +2,7 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,Navigate,Routes
 } from "react-router-dom";
 import routes from './../../config/routes'
 import ProtectedRoute from './../ProtectedRoute'
@@ -10,7 +10,7 @@ import ProtectedRoute from './../ProtectedRoute'
 function MainRouter () {
   return (
     <Router>
-      <Switch>
+      <Routes>
         {routes.map(({
             path,
             exact,
@@ -30,7 +30,7 @@ function MainRouter () {
             return  <Route path={path} exact={exact} key={index} component={Component}/>
           }
       })}
-    </Switch>
+    </Routes>
   </Router>
 )
 }

@@ -6,13 +6,15 @@ import "./login.css";
 import Home from "./Home";
 import { BrowserRouter ,Route, Routes, useNavigate ,Navigate ,Redirect } from "react-router-dom";
 import { render } from "@testing-library/react";
+import Routering from "../config/routing";
   
-function LoginSys() {
-
+function LoginSys(props) {
+  
+  
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  
 
   // User Login info
   const database = [
@@ -46,6 +48,7 @@ function LoginSys() {
         setErrorMessages({ name: "pass", message: errors.pass });
         // Invalid password
       } else {
+        props.ex();
         setIsSubmitted(true);
     //     <Routes>
     //   <Route path="/Home">
@@ -95,7 +98,7 @@ function LoginSys() {
     <div >
       <div >
         <div className="title">Sign In</div>
-        {isSubmitted ? <Navigate replace to="/Home" />: renderForm}
+        { renderForm}
       </div>
     </div>
 
