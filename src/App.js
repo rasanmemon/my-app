@@ -6,27 +6,27 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Questions from "./pages/Questions";
 import Routering from "./config/routing"; 
-// import MainRouter from './routes/MainRouter';
+import MainRouter from './routes/MainRouter';
 import {useEffect , useState} from "react"
 import axios from "axios";
 const  App=()=> {
   const message = "Connection Established With Backend"
-  const conn = async() => {
-  try {
-       axios.post("http://localhost:8080/start", {
-      message
-    })
-    .then((responce) => console.log(responce.data))
-  } catch (error) {
-    console.error(error)
-  }}
   useEffect( () => {
+    //TODO :: make sure connection is backend is not establish on every render.
+    const conn = async() => {
+    try {
+        await axios.post("http://localhost:8080/start", {
+        message
+      })
+      .then((responce) => console.log(responce.data))
+    } catch (error) {
+      console.error(error)
+    }}
     conn()
   },[]);
   const [loading ,setLoading] = useState(false);
   
   const setTrue =()=>{
-    
     setLoading(true);
     console.log("ex");
     
@@ -83,12 +83,12 @@ const  App=()=> {
   //         <Route path="/" element={<LoginSys />} /> 
   //         </Routes>
   //   </Router>
-  <div>
-    {loading ? <Routering />: <LoginSys ex={setTrue} />}
-  </div>
+  // <div>
+  //   {loading ? <Routering />: <LoginSys ex={setTrue} />}
+  // </div>
     // <Routering />
 //<Layout />
-  // <MainRouter></MainRouter>
+  <MainRouter></MainRouter>
   );
 }
 

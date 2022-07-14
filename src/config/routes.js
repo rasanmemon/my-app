@@ -6,27 +6,26 @@ import MainPage from "../pages/MainPage";
 
 const routes = [
     {
-      component: Home,
+      component: <LoginSys></LoginSys>,
+      title: 'Login',
+      path: '/',
+      exact: true,
+      isProtected: false
+    },
+    {
+      component: <Home></Home>,
       title: 'Home',
-      path: '/Home',
+      path: '/home',
       exact: true,
       isProtected: true
     },
     {
-        component: LoginSys,
-        title: 'Login',
-        path: '/',
-        exact: true,
-        isProtected: false
-      },
-      {
-        component: Questions,
-        title: 'Questions',
-        path: '/Question',
-        exact: true,
-        isProtected: true
-      }
-      
+      component: <Questions></Questions>,
+      title: 'Questions',
+      path: '/question',
+      exact: true,
+      isProtected: true
+    }      
   ];
   
   export default routes;

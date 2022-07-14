@@ -8,25 +8,12 @@ import { BrowserRouter ,Route, Routes, useNavigate ,Navigate ,Redirect } from "r
 import { render } from "@testing-library/react";
 import Routering from "../config/routing";
   
-function LoginSys(props) {
-  
-  
+function LoginSys() {  
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [data,setData] = useState([]);
-
-  // User Login info
-  // const database = [
-  //   {
-  //     username: "user1",
-  //     password: "pass1"
-  //   },
-  //   {
-  //     username: "user2",
-  //     password: "pass2"
-  //   }
-  // ];
+  
   const getData = () => {
     axios
     .get('http://localhost:8080/users')
@@ -38,6 +25,7 @@ function LoginSys(props) {
       console.log(err);
     });
   }
+
   useEffect( () => {
     if(data && data.length === 0){
       getData();
@@ -60,12 +48,14 @@ function LoginSys(props) {
 
     // Compare user info
     if (userData) {
+      console.log('userData',userData)
       if (userData.Password !== pass.value) {
         setErrorMessages({ name: "pass", message: errors.pass });
         // Invalid password
-      } else {
-        props.ex();
+      } else {        
         setIsSubmitted(true);
+        localStorage.setItem('userAuthenticated',true)
+        // <Navigate  from="/" to="/home" />
     //     <Routes>
     //   <Route path="/Home">
     //     <Home />
@@ -111,10 +101,10 @@ function LoginSys(props) {
   
 
   return (    
-    <div className="app">
-      <div className="login-form">
+    <div>
+      <div >
         <div className="title">Sign In</div>
-        { renderForm}
+        {isSubmitted ? <Navigate replace to="/home"></Navigate> : renderForm}
       </div>
     </div>
 

@@ -1,36 +1,36 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,Navigate,Routes
-} from "react-router-dom";
+import LoginSys from "../../pages/Login";
+import Layout from '../../pages/Layout';
+import { BrowserRouter as Router, Route ,Routes } from "react-router-dom";
 import routes from './../../config/routes'
-import ProtectedRoute from './../ProtectedRoute'
+import ProtectedRoutes from './../ProtectedRoute'
 
 function MainRouter () {
+  
   return (
     <Router>
       <Routes>
         {routes.map(({
-            path,
-            exact,
-            component: Component,
-            isProtected,
-            title
-          }, index) => {
-            if (isProtected) {
-              return <ProtectedRoute
-              component={Component}
-              title={title}
-              path={path}
-              exact={exact}
-              key={index}
-              isProtected={isProtected}/>
-          } else {
-            return  <Route path={path} exact={exact} key={index} component={Component}/>
-          }
-      })}
-    </Routes>
+          path,
+          exact,
+          component: component,
+          isProtected,
+          title
+        }, index) => {
+          if(isProtected){
+                console.log(path);
+                return <Route exact path={path} element={<ProtectedRoutes component={component}/>}>
+                  <Route
+                    path={path}
+                    element={component}
+                  />
+                </Route>
+              }
+            else {
+              return  <Route path={path} element={component}></Route>
+            }
+        })}
+      </Routes>
   </Router>
 )
 }

@@ -4,8 +4,15 @@ import { Outlet, Link } from "react-router-dom";
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import './layout.css'
 import '../csspages/layoutstyle.css'
+import { useNavigate  } from "react-router-dom";
+
 function Layout () {
-  
+  const navigate = useNavigate() // <-- hooks must be INSIDE the component
+
+  const handleLogout = () => {
+    localStorage.removeItem('userAuthenticated');
+    navigate('/')
+  }
   
   return (
     <>
@@ -16,13 +23,13 @@ function Layout () {
       </div>  
       <ul class="w3-bar-block">
           <li  >
-            <Link class="w3-bar-item w3-button w3-green"  to="/Home" >Home</Link>
+            <Link class="w3-bar-item w3-button w3-green"  to="/home" >Home</Link>
           </li>
           <li >
-            <Link class="w3-bar-item w3-button " to="/Question">Question</Link>
+            <Link class="w3-bar-item w3-button " to="/question">Question</Link>
           </li>
           <li >
-            {/* <Link class="w3-bar-item w3-button " to="/Login" >LogOut</Link> */}
+            <button class="w3-bar-item w3-button" onClick={()=>{handleLogout();}}>LogOut</button>            
           </li>
           
         </ul>
