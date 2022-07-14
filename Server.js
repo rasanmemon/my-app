@@ -46,7 +46,7 @@ app.get("/users", async (req, res) => {
     var ques
     try{
     
-    ques = await client.db("task").collection("users").find({}).toArray();
+    ques = await client.db("task").collection("Users").find({}).toArray();
     console.log(ques)
     }
     catch(e){

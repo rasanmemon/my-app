@@ -26,6 +26,7 @@ const  App=()=> {
   const [loading ,setLoading] = useState(false);
   
   const setTrue =()=>{
+    
     setLoading(true);
     console.log("ex");
     

@@ -17,16 +17,16 @@ function LoginSys(props) {
   const [data,setData] = useState([]);
 
   // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
-    }
-  ];
+  // const database = [
+  //   {
+  //     username: "user1",
+  //     password: "pass1"
+  //   },
+  //   {
+  //     username: "user2",
+  //     password: "pass2"
+  //   }
+  // ];
   const getData = () => {
     axios
     .get('http://localhost:8080/users')
@@ -56,11 +56,11 @@ function LoginSys(props) {
     var { uname, pass } = document.forms[0];
 
     // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
+    const userData = data.find((user) => user.Username === uname.value);
 
     // Compare user info
     if (userData) {
-      if (userData.password !== pass.value) {
+      if (userData.Password !== pass.value) {
         setErrorMessages({ name: "pass", message: errors.pass });
         // Invalid password
       } else {
