@@ -11,16 +11,16 @@ import {useEffect , useState} from "react"
 import axios from "axios";
 const  App=()=> {
   const message = "Connection Established With Backend"
+  const conn = async() => {
+  try {
+       axios.post("http://localhost:8080/start", {
+      message
+    })
+    .then((responce) => console.log(responce.data))
+  } catch (error) {
+    console.error(error)
+  }}
   useEffect( () => {
-    const conn = async() => {
-    try {
-        await axios.post("http://localhost:8080/start", {
-        message
-      })
-      .then((responce) => console.log(responce.data))
-    } catch (error) {
-      console.error(error)
-    }}
     conn()
   },[]);
   const [loading ,setLoading] = useState(false);
