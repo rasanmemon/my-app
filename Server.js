@@ -42,3 +42,22 @@ app.get("/getQuestions", async (req, res) => {
         res.send("Failed")
     }
 })
+app.get("/users", async (req, res) => {
+    var ques
+    try{
+    
+    ques = await client.db("task").collection("users").find({}).toArray();
+    console.log(ques)
+    }
+    catch(e){
+        console.log(e)
+    }
+    if (ques != null){
+        console.log("user Fetched")
+        res.send(ques)
+    }
+    else{
+        console.log("users fetch failed")
+        res.send("Failed")
+    }
+})

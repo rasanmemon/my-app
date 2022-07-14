@@ -28,14 +28,19 @@ const Questions = ()=> {
      
     return (
     <div class="w3-container w3-display-container" style={mystyle} >
+      <div className="">
+      <div className="login-form">
+
      <ul>
      {
-      data.map((dt,index)=>{
-        // return <li>{}</li>
-        return <li>{dt.Qno + ": "+ dt.Questions}</li>
-      })
-     }
+       data.map((dt,index)=>{
+         // return <li>{}</li>
+         return <li>{dt.Qno + ": "+ dt.Questions}</li>
+        })
+      }
      </ul>         
+      </div>
+      </div>
     </div>
        
     );

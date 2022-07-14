@@ -1,7 +1,7 @@
-import React, { useState }  from "react";
+import React, { useState, useEffect }  from "react";
 import ReactDOM  from "react-dom/client";
 import MainPage from "./MainPage";
-
+import axios from "axios";
 import "./login.css";
 import Home from "./Home";
 import { BrowserRouter ,Route, Routes, useNavigate ,Navigate ,Redirect } from "react-router-dom";
@@ -14,7 +14,7 @@ function LoginSys(props) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-  
+  const [data,setData] = useState([]);
 
   // User Login info
   const database = [
@@ -27,6 +27,22 @@ function LoginSys(props) {
       password: "pass2"
     }
   ];
+  const getData = () => {
+    axios
+    .get('http://localhost:8080/users')
+    .then((res) => {
+      console.log(res);
+      setData(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+  useEffect( () => {
+    if(data && data.length === 0){
+      getData();
+    }
+  },[]);
 
   const errors = {
     uname: "invalid username",
@@ -95,8 +111,8 @@ function LoginSys(props) {
   
 
   return (    
-    <div >
-      <div >
+    <div className="app">
+      <div className="login-form">
         <div className="title">Sign In</div>
         { renderForm}
       </div>
