@@ -11,7 +11,7 @@ function Layout () {
 
   const handleLogout = () => {
     localStorage.removeItem('userAuthenticated');
-    navigate('/')
+    navigate('/login')
   }
   
   return (
@@ -23,7 +23,7 @@ function Layout () {
       </div>  
       <ul class="w3-bar-block">
           <li  >
-            <Link class="w3-bar-item w3-button w3-green"  to="/home" >Home</Link>
+            <Link class="w3-bar-item w3-button w3-green"  to="/" >Home</Link>
           </li>
           <li >
             <Link class="w3-bar-item w3-button " to="/question">Question</Link>

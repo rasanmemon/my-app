@@ -9,20 +9,18 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cors())
 const uri = "mongodb+srv://cnq:123@cluster0.o58ea.mongodb.net/?retryWrites=true&w=majority"
-global.client = new MongoClient(uri);
+const client = new MongoClient(uri);
 
-app.post("/start", async (req, res) => {
-    let { message } = req.body
-    try{
-        await client.connect()
-        console.log("MongoDB Server Connected Successfully!!")
+async function createConnection(){
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+        console.log('Database Connection Established...')
+    } catch (e) {
+        console.error(e);
     }
-    catch(e){
-        console.log(e)
-    }
-    console.log(message);
-    res.send("All Connections Established!!")
-})
+}
+createConnection().catch(console.error);
 app.get("/getQuestions", async (req, res) => {
     var ques
     try{
@@ -43,11 +41,14 @@ app.get("/getQuestions", async (req, res) => {
     }
 })
 app.get("/users", async (req, res) => {
-    var ques
-    try{
-    
-    ques = await client.db("task").collection("Users").find({}).toArray();
+    var ques;
+    console.log(req.params);
+    const username= "user1";
+    const password= "pass1";
+    try{    
+    ques = await client.db("task").collection("Users").findOne({Username:username,Password:password});
     console.log(ques)
+    
     }
     catch(e){
         console.log(e)
@@ -60,4 +61,5 @@ app.get("/users", async (req, res) => {
         console.log("users fetch failed")
         res.send("Failed")
     }
+     
 })

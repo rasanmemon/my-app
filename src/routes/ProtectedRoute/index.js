@@ -1,28 +1,26 @@
 import React from 'react';
-import { Route,Navigate, Outlet  } from "react-router-dom";
+import {Navigate, Outlet  } from "react-router-dom";
 import Layout from '../../pages/Layout';
-import MainPage from '../../pages/MainPage';
 
-import Home from "../../pages/Home";
-import Questions from "../../pages/Questions";
-import LoginSys from '../../pages/Login';
-// import AppLayout from './../../layout/AppLayout';
+
 
 const authenticateUser = () => {
+  console.log(localStorage);
   if ( !localStorage.getItem("userAuthenticated")) {
     return false;
   }
   return true;
 }
 
-function ProtectedRoutes( { component } ) {  
+const ProtectedRoutes =( { component } ) =>{  
+  console.log(localStorage);
   if( !authenticateUser() ) {
-     return <Navigate to='/'/>
+     return <Navigate to='/login'/>
   }
 
   return (
     <Layout>      
-      <Outlet></Outlet>
+      {/* <Outlet></Outlet> */}
     </Layout>
     
   )}

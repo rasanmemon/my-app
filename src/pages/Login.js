@@ -1,69 +1,53 @@
 import React, { useState, useEffect }  from "react";
-import ReactDOM  from "react-dom/client";
-import MainPage from "./MainPage";
 import axios from "axios";
 import "./login.css";
-import Home from "./Home";
-import { BrowserRouter ,Route, Routes, useNavigate ,Navigate ,Redirect } from "react-router-dom";
-import { render } from "@testing-library/react";
-import Routering from "../config/routing";
-  
+import {Navigate  } from "react-router-dom";
+
 function LoginSys() {  
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [data,setData] = useState([]);
   
-  const getData = () => {
+  const getData = (userName,passWord) => {
     axios
     .get('http://localhost:8080/users')
     .then((res) => {
       console.log(res);
-      setData(res.data);
+      // setData(res.data);
+      return res.data
+      
     })
     .catch((err) => {
       console.log(err);
     });
   }
 
-  useEffect( () => {
-    if(data && data.length === 0){
-      getData();
-    }
-  },[]);
-
   const errors = {
     uname: "invalid username",
     pass: "invalid password"
   };
   
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     //Prevent page reload
     event.preventDefault();
 
     var { uname, pass } = document.forms[0];
-
+  
+    const userData = await getData(uname, pass);
+    
+    console.log('userData ==>',userData)
     // Find user login info
-    const userData = data.find((user) => user.Username === uname.value);
+    //const userData = data.find((user) => user.Username === uname.value);
 
     // Compare user info
     if (userData) {
-      console.log('userData',userData)
       if (userData.Password !== pass.value) {
         setErrorMessages({ name: "pass", message: errors.pass });
         // Invalid password
       } else {        
         setIsSubmitted(true);
-        localStorage.setItem('userAuthenticated',true)
-        // <Navigate  from="/" to="/home" />
-    //     <Routes>
-    //   <Route path="/Home">
-    //     <Home />
-    //   </Route>
-    //   <Navigate  from="/" to="/Home" />
-    // </Routes>
-        
-        
+        localStorage.setItem('userAuthenticated',true)        
       }
     } else {
       // Username not found
@@ -83,12 +67,12 @@ function LoginSys() {
       <form onSubmit={handleSubmit}>
         <div className="input-container">
           <label>Username </label>
-          <input type="text" name="uname" required />
+          <input type="text" name="uname" required  autoComplete="username"/>
           {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
           <label>Password </label>
-          <input type="password" name="pass" required />
+          <input type="password" name="pass" required  autoComplete="current-password" />
           {renderErrorMessage("pass")}
         </div>
         <div className="button-container">
@@ -96,21 +80,15 @@ function LoginSys() {
         </div>
       </form>
     </div>
-  
   );
   
-
   return (    
     <div>
       <div >
         <div className="title">Sign In</div>
-        {isSubmitted ? <Navigate replace to="/home"></Navigate> : renderForm}
+        {isSubmitted ? <Navigate replace to="/"></Navigate> : renderForm}
       </div>
     </div>
-
-    
-
   );
 }
-
 export default LoginSys;
