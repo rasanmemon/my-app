@@ -5,7 +5,7 @@ import Layout from '../../pages/Layout';
 
 
 const authenticateUser = () => {
-  console.log(localStorage);
+ 
   if ( !localStorage.getItem("userAuthenticated")) {
     return false;
   }
@@ -13,7 +13,6 @@ const authenticateUser = () => {
 }
 
 const ProtectedRoutes =( { component } ) =>{  
-  console.log(localStorage);
   if( !authenticateUser() ) {
      return <Navigate to='/login'/>
   }

@@ -41,14 +41,15 @@ app.get("/getQuestions", async (req, res) => {
     }
 })
 app.get("/users", async (req, res) => {
+    let { username,password }=req.body
     var ques;
-    console.log(req.params);
-    const username= "user1";
-    const password= "pass1";
+    // const username= "user1";
+    // const password= "pass1";
     try{    
-    ques = await client.db("task").collection("Users").findOne({Username:username,Password:password});
-    console.log(ques)
-    
+        ques = await client.db("task").collection("Users").findOne({username,password});
+        // console.log(ques)
+        console.log(ques.Username,ques.Password);
+        
     }
     catch(e){
         console.log(e)
@@ -56,6 +57,7 @@ app.get("/users", async (req, res) => {
     if (ques != null){
         console.log("user Fetched")
         res.send(ques)
+        
     }
     else{
         console.log("users fetch failed")

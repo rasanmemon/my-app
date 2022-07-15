@@ -10,7 +10,7 @@ function Home() {
         margin: "0 0 0 200px"
     }
     return (
-        <div class="w3-container w3-display-container" style={mystyle}>
+        <div className="w3-container w3-display-container" style={mystyle}>
 
          Home
         </div>

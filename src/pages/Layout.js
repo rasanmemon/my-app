@@ -16,20 +16,20 @@ function Layout () {
   
   return (
     <>
-      <nav class="w3-sidebar w3-light-grey w3-card-4 w3-animate-left" id="mySidebar" >
-      <div class="w3-bar w3-dark-grey">
-      <span class="w3-bar-item w3-padding-16">Content</span>
+      <nav className="w3-sidebar w3-light-grey w3-card-4 w3-animate-left" id="mySidebar" >
+      <div className="w3-bar w3-dark-grey">
+      <span className="w3-bar-item w3-padding-16">Content</span>
       
       </div>  
-      <ul class="w3-bar-block">
+      <ul className="w3-bar-block">
           <li  >
-            <Link class="w3-bar-item w3-button w3-green"  to="/" >Home</Link>
+            <Link className="w3-bar-item w3-button w3-green"  to="/" >Home</Link>
           </li>
           <li >
-            <Link class="w3-bar-item w3-button " to="/question">Question</Link>
+            <Link className="w3-bar-item w3-button " to="/question">Question</Link>
           </li>
           <li >
-            <button class="w3-bar-item w3-button" onClick={()=>{handleLogout();}}>LogOut</button>            
+            <button className="w3-bar-item w3-button" onClick={()=>{handleLogout();}}>LogOut</button>            
           </li>
           
         </ul>

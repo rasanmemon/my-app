@@ -4,7 +4,6 @@ import axios from "axios";
 const Questions = ()=> {
     // console.log('Im Superman');
     const [data,setData] = useState([]);
-    const [loading, setloading] = useState(false);
     const mystyle={
         margin: "0 0 0 200px"
     }
@@ -27,15 +26,15 @@ const Questions = ()=> {
 
      
     return (
-    <div class="w3-container w3-display-container" style={mystyle} >
-      <div className="">
+    <div className="w3-container w3-display-container" style={mystyle} >
+      <div >
       <div className="login-form">
 
      <ul>
      {
        data.map((dt,index)=>{
          // return <li>{}</li>
-         return <li>{dt.Qno + ": "+ dt.Questions}</li>
+         return <li key={index}>{dt.Qno + ": "+ dt.Questions}</li>
         })
       }
      </ul>         
