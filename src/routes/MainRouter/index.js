@@ -1,9 +1,7 @@
 import React from "react";
-
 import { BrowserRouter as Router, Route ,Routes } from "react-router-dom";
 import routes from './../../config/routes'
 import ProtectedRoutes from './../ProtectedRoute'
-
 function MainRouter () {
   return (
     <Router>
