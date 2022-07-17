@@ -8,14 +8,15 @@ function LoginSys() {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate()
-
+  let [data,setData]=useState([]);
 
   const getData = async (userName, passWord) => {
-    let data = {}
-    await axios.get('http://localhost:8080/users', userName, passWord
+    // let data = [{}]
+    await axios.get(`http://localhost:8080/users?userName=${userName}&passWord=${passWord}`
     )
       .then((res) => {
         data = res.data
+        // console.log(res.dat)
 
       })
       .catch((err) => {
@@ -25,8 +26,8 @@ function LoginSys() {
   }
 
   const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
+    msg: "invalid username and password",
+    
   };
 
   const handleSubmit = async (event) => {
@@ -37,19 +38,18 @@ function LoginSys() {
 
     // Find user login info
     let userData = await getData(uname.value, pass.value)
+    console.log(userData)
+    
 
     // Compare user info
-    if (userData) {
-      if (userData.Password !== pass.value) {
-        setErrorMessages({ name: "pass", message: errors.pass });
-        // Invalid password
-      } else {
+    if (userData.length>0) {
+     
         setIsSubmitted(true);
         localStorage.setItem('userAuthenticated', true)
       }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
+     else {
+      // Item not found
+      setErrorMessages({ name: "error", message: errors.msg });
     }
   };
 
@@ -63,18 +63,22 @@ function LoginSys() {
   const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>
+        <div className="app">
+        <div className="login-form">
+        <div className="title">Sign In</div>
         <div className="input-container">
           <label>Username </label>
-          <input type="text" name="uname" required autoComplete="username" />
-          {renderErrorMessage("uname")}
+          <input type="text" name="uname" required  />
         </div>
         <div className="input-container">
           <label>Password </label>
-          <input type="password" name="pass" required autoComplete="current-password" />
-          {renderErrorMessage("pass")}
+          <input type="password" name="pass" required />
+          {renderErrorMessage("error")}
         </div>
         <div className="button-container">
           <input type="submit" />
+        </div>
+        </div>
         </div>
       </form>
     </div>
@@ -87,7 +91,7 @@ function LoginSys() {
   return (
     <div>
       <div >
-        <div className="title">Sign In</div>
+       
         {isSubmitted ? <Navigate replace to="/"></Navigate> : renderForm}
       </div>
     </div>

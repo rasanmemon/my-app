@@ -2,7 +2,7 @@ import React, { useState,useEffect }  from "react";
 import axios from "axios";
 
 const Questions = ()=> {
-    // console.log('Im Superman');
+  
     const [data,setData] = useState([]);
     const mystyle={
         margin: "0 0 0 200px"
@@ -33,7 +33,6 @@ const Questions = ()=> {
      <ul>
      {
        data.map((dt,index)=>{
-         // return <li>{}</li>
          return <li key={index}>{dt.Qno + ": "+ dt.Questions}</li>
         })
       }

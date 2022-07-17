@@ -41,14 +41,15 @@ app.get("/getQuestions", async (req, res) => {
     }
 })
 app.get("/users", async (req, res) => {
-    let { username,password }=req.body
+    const username=req.query.userName
+    const password=req.query.passWord
+    console.log(username,password)
     var ques;
-    // const username= "user1";
-    // const password= "pass1";
+    
     try{    
-        ques = await client.db("task").collection("Users").findOne({username,password});
-        // console.log(ques)
-        console.log(ques.Username,ques.Password);
+        ques = await client.db("task").collection("Users").find({Username:username,Password:password}).toArray();
+      
+        console.log(ques);
         
     }
     catch(e){
